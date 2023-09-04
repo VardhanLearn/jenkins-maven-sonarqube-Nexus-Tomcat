@@ -1,59 +1,44 @@
 pipeline {
     
     agent any
-
-    stages {
-        
+    
+      stages {
         stage ('Git-Checkout') {
             
             steps {
                 
                 git branch: 'main',
-                credentialsId: 'github-token',
                 url: 'https://github.com/VardhanLearn/jenkins-maven-sonarqube.git'
                 
             }
-            
-        }
+        }  
         
-        stage ('Maven-build') {
-            
-            steps {
+        stage ('Maven-Build') {
+             
+             steps {
                 
-                sh 'mvn clean package'
-                
-            }
-            
-            post {
-                
-                success {
-                    
-                    archiveArtifacts artifacts: '**/*.jar'
-                    
-                }
-                
-            }
-            
+                sh 'mvn clean package'   
+             }
         }
-        
-        stage ('Sonar') {
-            
-            steps {
-                
-                withSonarQubeEnv('sonar-server') { 
-                    
-                    sh 'mvn sonar:sonar'
-                    //   -Dsonar.projectKey=sonar-project \
-                    //   -Dsonar.host.url=http://52.66.252.23:9000
-                    //   -Dsonar.login=b0097a8dd734154f174ebdb8fc4eab8626357b24
-
-Or 
-
-                    sh 'mvn sonar:sonar'
-                       -Dsonar.projectKey=sonar-project \          
-                       -Dsonar.host.url=http://52.66.252.23:9000
-                       -Dsonar.login=b0097a8dd734154f174ebdb8fc4eab8626357b24
-                    
-                }
-                
-            }
+             
+             
+	    stage ('sonar') {
+	        
+	        steps {
+	            
+	            withSonarQubeEnv ('sonar') {
+	             
+	             sh 'mvn sonar:sonar' 
+	             
+	            }
+	        }
+	    }
+    }    
+             post {
+	          success {
+	              echo 'Now Archiving it'
+	              archiveArtifacts artifacts: '**/*.jar'
+	           }
+	        }
+}
+	        
