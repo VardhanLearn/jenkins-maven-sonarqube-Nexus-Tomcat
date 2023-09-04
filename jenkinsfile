@@ -1,22 +1,16 @@
 pipeline {
     
     agent any
-    
-    tools {
-        
-        maven 'mvn'
-        
-    }
-    
+
     stages {
         
         stage ('Git-Checkout') {
             
             steps {
                 
-                git branch: 'master',
+                git branch: 'main',
                 credentialsId: 'github-token',
-                url: 'https://github.com/abhishekishor/jenkins-maven-sonarqube.git'
+                url: 'https://github.com/VardhanLearn/jenkins-maven-sonarqube.git'
                 
             }
             
