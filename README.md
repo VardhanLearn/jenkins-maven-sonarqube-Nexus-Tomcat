@@ -1,4 +1,3 @@
 # jenkins-maven-sonarqube
 
-
-![Jenkins-sonarqube](https://github.com/abhishekishor/jenkins-maven-sonarqube/assets/121818867/1d4d129f-2f44-40d5-9650-8877ec57fa21)
+![nexus](https://github.com/VardhanLearn/jenkins-maven-sonarqube-Nexus/assets/87961252/fab7957d-d5ea-4697-a64c-58bc34d294af)
