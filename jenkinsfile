@@ -47,7 +47,7 @@ pipeline {
 	           ],
 	           credentialsId: 'nexus-credentials',
 	           groupId: 'com.example',
-	           nexusUrl: '13.233.140.139:8081',
+	           nexusUrl: '13.233.215.135:8081',
 	           nexusVersion: 'nexus3',
 	           protocol: 'http',
 	           repository: 'Vardhan-app',
@@ -56,6 +56,21 @@ pipeline {
 	        
 	    }
 	    
+	    stage ('Deploy jar file to Tomcat'){
+	    
+	      steps {
+		  
+		   sshagent(['tomcat-credentials']){
+	      
+	            sh """
+			     scp -o StrictHostKeyChecking=no target/*.jar ubuntu@3.110.162.211:/opt/tomcat-9/webapps
+		       	     ssh -o StrictHostKeyChecking=no ubuntu@3.110.162.211 /opt/tomcat-9/bin/shutdown.sh
+			     ssh -o StrictHostKeyChecking=no ubuntu@3.110.162.211 /opt/tomcat-9/bin/startup.sh		
+
+		       """
+	   }
+	  }
+	 }
     }    
              post {
 	          success {
