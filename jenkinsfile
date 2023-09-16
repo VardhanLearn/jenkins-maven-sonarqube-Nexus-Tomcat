@@ -64,7 +64,7 @@ pipeline {
 	      
 	            sh """
 			     scp -o StrictHostKeyChecking=no target/*.jar ubuntu@3.110.162.211:/opt/tomcat-9/webapps
-		       	     ssh -o StrictHostKeyChecking=no ubuntu@3.110.162.211 /opt/tomcat-9/bin/shutdown.sh
+		       	 ssh -o StrictHostKeyChecking=no ubuntu@3.110.162.211 /opt/tomcat-9/bin/shutdown.sh
 			     ssh -o StrictHostKeyChecking=no ubuntu@3.110.162.211 /opt/tomcat-9/bin/startup.sh		
 
 		       """
